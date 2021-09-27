@@ -29,7 +29,7 @@ antechamber -i ${lig}.mol2 -fi mol2 -o ${lig}.gjf -fo gcrt -pf y -gn "%nproc=8"
 # use gaussian outfile as input
 antechamber -i ${lig}.log -fi gout -o ${lig}_resp.mol2 -fo mol2 -c resp -pf y
 
-# check if all of the needed force field parameters and writes a force field modification
+# check if all of the needed force field parameters and writes a force field modification(frcmod)
 parmchk2 -i ${lig}_resp.mol2 -f mol2 -o ${lig}.frcmod
 # frcmod file containing any force field parameters that are needed for the molecule but not supplied by the force field (*.dat) file.  
 ```
@@ -43,7 +43,7 @@ parmchk2 -i ${lig}_resp.mol2 -f mol2 -o ${lig}.frcmod
 -  -gn  settings in gaussion input
 
 ### tleap  
-The tleap module is basic tool to construct force field files for other amber modules, like pmemd. The tleap can be interactive or read file, like leap.in, as inout.  
+The tleap module is basic tool to construct force field files for other amber modules, like pmemd. The tleap can be interactive or read file, like leap.in, as input.  
 Usage:
 ```bash
 tleap -f leap.in 
@@ -125,6 +125,35 @@ pmemd -i step.in -p complex.prmtop -c complex.inpcrd -ref complex.inpcrd -r comp
 
 ### cpptraj
 
+Cpptraj (the successor toptraj) is the main program in Amber for processing coordinate trajectories and data files. It is interactive, but you can use `_EOF` to read a input file. 
+
+Usage:
+```bash 
+cpptraj -p ti.parm7 < commands
+```
+commands examples
+Example 1
+```bash
+# generate RMSD
+# load trajectory
+trajin ti001.nc
+#Automatically center and image (by molecule) a trajectory with periodic boundaries. 
+autoimage 
+rms ToFirstComplex :1-99999&!@H&!:WAT= first out rmsd_complex.agr mass
+run
+``` 
+  
+Example 2
+```bash
+# modify the structure
+
+#load structure
+trajin ${s}_prepare/press.rst7
+# remove residue 1,2
+strip ":1,2"
+# output the structure
+outtraj ${s}_solvated.pdb onlyframes 1
+```
 
 ## Useful modules for complex simulation
 

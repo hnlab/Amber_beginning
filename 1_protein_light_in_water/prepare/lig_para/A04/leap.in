@@ -1,0 +1,9 @@
+source leaprc.protein.ff19SB
+source leaprc.gaff
+
+A04=loadmol2 A04_bcc.mol2
+loadamberparams A04.frcmod
+saveoff A04 A04.lib
+saveamberparm A04 A04.prmtop A04.inpcrd
+
+quit

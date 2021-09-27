@@ -1,0 +1,18 @@
+source leaprc.protein.ff19SB
+source leaprc.gaff
+source leaprc.water.tip3p
+
+loadoff A04.lib
+
+# load the coordinates and create the complex
+ligands = loadpdb A04.pdb
+complex = loadpdb alpha_ikke.pdb
+complex = combine {ligands complex}
+
+# create complex in solution for vdw+bonded transformation
+solvatebox complex TIP3PBOX 12.0 0.75
+addions complex Cl- 0
+savepdb complex complex_vdw_bonded.pdb
+saveamberparm complex complex_vdw_bonded.parm7 complex_vdw_bonded.rst7
+
+quit

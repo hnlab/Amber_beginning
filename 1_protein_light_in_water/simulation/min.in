@@ -1,0 +1,13 @@
+minimisation
+ &cntrl
+   imin = 1, ntmin = 2,
+   maxcyc = 5000,
+   ntpr = 200, ntwe = 200,
+   ntb = 1,
+   ntr = 1, restraint_wt = 5.00,
+   restraintmask='!:WAT & !@H=',
+
+ /
+ &ewald
+ / 
+
