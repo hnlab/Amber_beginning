@@ -1,0 +1,25 @@
+pressurising
+ &cntrl
+   imin = 0, nstlim = 100000, irest = 1, ntx = 5, dt = 0.002,
+   ntt = 1, temp0 = 300.0, tautp = 1.0,
+   ntp = 1, pres0 = 1.0, taup = 2.0,
+   ntb = 2,
+   ntc = 2, ntf = 1, noshakemask = ':1,2', 
+   ioutfm = 1, iwrap = 1,
+   ntwe = 1000, ntwx = 1000, ntpr = 1000, ntwr = 5000,
+
+   ntr = 1, restraint_wt = 1.0,
+   restraintmask='!:WAT & !@H=',
+
+   icfe = 1, ifsc = 1, clambda = 0.5, scalpha = 0.2, scbeta = 50.0,
+   gti_add_sc = 2,
+   gti_bat_sc = 1,
+   logdvdl = 0,
+   timask1 = ':LIGAND1', timask2 = ':LIGAND2',
+   scmask1 = ':LIGAND1@ATOMS', scmask2 = ':LIGAND2@ATOMS'
+ /
+ &ewald
+ / 
+
+
+

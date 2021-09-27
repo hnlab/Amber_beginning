@@ -102,10 +102,25 @@ echo "Pressurising..."
 $mdrun -i press.in -p $prmtop -c heat.rst7 -O -o press.out -e press.en -inf press.info -r press.rst7 -x press.nc -l press.log
 ```
 
-There *.ins are the control file for the pmemd.cuda
+There *.ins are the control file for the pmemd.cuda. Here is an example:
+
+```Fortran
+minimisation
+ &cntrl
+   imin = 1, ntmin = 2,
+   maxcyc = 5000,
+   ntpr = 200, ntwe = 200,
+   ntb = 1,
+   ntr = 1, restraint_wt = 5.00,
+   restraintmask='!:WAT & !@H=',
+
+ /
+ &ewald
+ / 
+```
 
 ## Anaylsis
-test
+
 
 
 
