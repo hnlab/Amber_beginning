@@ -1,4 +1,6 @@
 from pathlib import Path
+import subprocess
+import shlex
 import argparse
 
 class Atom:
@@ -42,6 +44,14 @@ class Ligand:
         with open(f"{path}/LCH.pdb","w") as outfile:
             for line in self.lines:
                 outfile.write(f"{line[0:17]}LCH{line[20:]}")
+        command1 = "antechamber -i LCH.pdb -fi pdb -nc 1 -o LCH_bcc.mol2 -fo mol2 -c bcc -pf y"
+        command2 = "antechamber -i LCH.pdb -fi pdb -o LCH_bcc.mol2 -fo mol2 -c bcc -pf y"
+        args = [shlex.split(command) for command in [command1,command2] ]
+        if subprocess.call(args[1]) == 0:
+            pass
+        else:
+            subprocess.run(args[0])
+
     
     def output_LPN(self,path):
         with open(f"{path}/LPN.pdb","w") as outfile:
@@ -50,6 +60,13 @@ class Ligand:
                     outfile.write(f"{line[0:17]}LPN{line[20:]}")
                 elif self.delta_atoms[0] in line:
                     outfile.write(f"{line[0:12]} {self.delta_atoms[2]:<3} LPN{line[20:]}")
+        command1 = "antechamber -i LPN.pdb -fi pdb -nc 1 -o LPN_bcc.mol2 -fo mol2 -c bcc -pf y"
+        command2 = "antechamber -i LPN.pdb -fi pdb -o LPN_bcc.mol2 -fo mol2 -c bcc -pf y"
+        args = [shlex.split(command) for command in [command1,command2] ]
+        if subprocess.call(args[1]) == 0:
+            pass
+        else:
+            subprocess.run(args[0])
 
 class Amino:
     def __init__(self,amino) -> None:
@@ -133,8 +150,7 @@ def parse_ref(ref):
             atoms_in_amino[i] = inf[i+1][1:-1].replace("\'"," ").replace(","," ").split()
         amino_re_atoms[amino_name] = atoms_in_amino
     return amino_re_atoms
-# text.ref has the atom names used in amber.
-chain = parse_ref("text.ref")
+chain = parse_ref("/pubhome/yjcheng02/FEP/wangqing/systems_for_FEP/text.ref")
 
 if __name__ == "__main__":
 
