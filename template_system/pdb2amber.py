@@ -150,7 +150,7 @@ def parse_ref(ref):
             atoms_in_amino[i] = inf[i+1][1:-1].replace("\'"," ").replace(","," ").split()
         amino_re_atoms[amino_name] = atoms_in_amino
     return amino_re_atoms
-chain = parse_ref("/pubhome/yjcheng02/FEP/wangqing/systems_for_FEP/text.ref")
+chain = parse_ref("text.ref")
 
 if __name__ == "__main__":
 
