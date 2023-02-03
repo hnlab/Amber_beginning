@@ -111,7 +111,7 @@ class System:
                     #print(self.protein_line[i+1])
                     amino_th.append(self.protein_line[i+1])
                 else:
-                    #when the amino order change, the amino_th array contain the all atoms of last amino
+                    # when the amino order change, the amino_th array contain the all atoms of last amino
                     # use the amino order as the key, amino class as the value
                     self.aminos[int(amino_th[0][23:32])] = Amino(amino_th)
                     amino_th = []
